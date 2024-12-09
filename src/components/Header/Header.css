@@ -10,9 +10,6 @@
   padding: 32px 0 28px;
 }
 
-.header__logo {
-}
-
 .header__date-location {
   margin: 0;
   padding: 0 0 0 24px;
@@ -38,7 +35,4 @@
   font-family: "Cabinet Grotesk", sans-serif;
   line-height: 25px;
   font-weight: 700;
-}
-
-.header__avator {
 }
