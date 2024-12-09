@@ -30,7 +30,7 @@ function App() {
   };
 
   useEffect(() => {
-    getWeather({ coordinates, APIkey })
+    getWeather(coordinates, APIkey)
       .then((data) => {
         const filteredWeatherData = filterWeatherData(data);
         setWeatherData(filteredWeatherData);
