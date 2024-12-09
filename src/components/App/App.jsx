@@ -13,7 +13,8 @@ function App() {
   const [activeModal, setActiveModal] = useState("preview-image");
   const [weatherData, setWeatherData] = useState({
     type: "",
-    temp: { F: 999, C: 999 },
+    temp: { F: 999 },
+    city: "",
   });
   const [selectedCard, setSelectedCard] = useState("");
 
@@ -32,8 +33,8 @@ function App() {
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
-        const filteredWeatherData = filterWeatherData(data);
-        setWeatherData(filteredWeatherData);
+        const filteredData = filterWeatherData(data);
+        setWeatherData(filteredData);
       })
       .catch(console.log.error);
   }, []);
@@ -41,7 +42,7 @@ function App() {
   return (
     <div className="page">
       <div className="page__content">
-        <Header handleAddClick={handleAddClick} wetherData={weatherData} />
+        <Header handleAddClick={handleAddClick} weatherData={weatherData} />
         <Main weatherData={weatherData} handleCardClick={handleCardClick} />
         <Footer />
       </div>
