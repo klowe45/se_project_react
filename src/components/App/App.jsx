@@ -16,7 +16,7 @@ function App() {
     temp: { F: 999 },
     city: "",
   });
-  const [selectedCard, setSelectedCard] = useState("");
+  const [selectedCard, setSelectedCard] = useState({});
 
   const handleAddClick = () => {
     setActiveModal("add-garment");
@@ -35,9 +35,8 @@ function App() {
       .then((data) => {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
-        // debugger;
       })
-      .catch(console.log.error);
+      .catch(console.error);
   }, []);
 
   return (
@@ -52,6 +51,7 @@ function App() {
         buttonText="Add garment"
         activeModal={activeModal}
         closeModal={closeModal}
+        isOpen={activeModal === "add-garment"}
       >
         <label htmlFor="name" className="modal__label">
           Name{""}

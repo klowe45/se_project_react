@@ -6,9 +6,10 @@ function ModalWithForm({
   titleText,
   activeModal,
   closeModal,
+  isOpen,
 }) {
   return (
-    <div className={`modal ${activeModal === "add-garment" && "modal_opened"}`}>
+    <div className={`modal ${isOpen && "modal_opened"}`}>
       <div className="modal__content">
         <form className="modal_form">
           <h2 className="modal__title">{titleText}</h2>
