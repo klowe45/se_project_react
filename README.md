@@ -15,7 +15,7 @@ WTWR is far from done. Coming up soon is a dynamic interface to adjust for multi
 ![image](https://github.com/user-attachments/assets/35e436f6-ae52-4314-a75f-7fb5bf0fc24f)
 
 # Github Link
-
+https://github.com/klowe45/se_project_react.git
 
 
 
