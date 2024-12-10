@@ -7,7 +7,7 @@ WTWR is an application that assists users in what to wear depending on the curre
 WTWR is an application that utilizes a weather API. With this API, the user is able to get their local temperature. The application then takes the temperature and filters clothing options for the user. 
 
 ## What To Come
-WTWR is far from done. Coming up soon is a dynamic interface to adjust for multiple screen sizes. 
+WTWR is far from done. Coming up soon is a dynamic interface to adjust for multiple screen sizes. UI updates for a more interactive application.
 
 ## Images
 ![image](https://github.com/user-attachments/assets/89a3b466-b7cc-4517-8cd8-254069a1db9e)
