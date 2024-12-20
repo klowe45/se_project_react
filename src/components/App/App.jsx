@@ -8,21 +8,33 @@ import ItemModal from "../ItemModal/ItemModal";
 import Footer from "../Footer/Footer";
 import { getWeather } from "../../utils/weatherApi";
 import { filterWeatherData } from "../../utils/weatherApi";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
 function App() {
   /***************************************************************************
-   *                               TOGGLE TEMP                               *
+   *                              CARD SELECTED                              *
    ***************************************************************************/
+
   const [selectedCard, setSelectedCard] = useState({});
 
-  const handleToggleSwitchChange = () => {};
+  /***************************************************************************
+   *                               TOGGLE TEMP                               *
+   ***************************************************************************/
 
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  console.log(currentTemperatureUnit);
+
+  const handleToggleSwitchChange = () => {
+    // currentTemperatureUnit === "F"
+    //   ? setCurrentTemperatureUnit("C")
+    //   : setCurrentTemperatureUnit("F");
+    if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
+    if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
+  };
 
   const [weatherData, setWeatherData] = useState({
     type: "",
-    temp: { F: 999 },
+    temp: { F: 999, C: 999 },
     city: "",
   });
 
