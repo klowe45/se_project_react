@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer className="footer__content">
       <div>
-        <p className="footer__developer-text">Developed By kenneth Lowe</p>
+        <p className="footer__developer-text">Developed By Kenneth Lowe</p>
       </div>
       <div>
         <p className="footer__year-text">{currentYear}</p>

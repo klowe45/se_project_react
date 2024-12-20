@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { coordinates, APIkey } from "../../utils/constants";
 import Header from "../Header/Header";
@@ -9,6 +10,7 @@ import Footer from "../Footer/Footer";
 import { getWeather } from "../../utils/weatherApi";
 import { filterWeatherData } from "../../utils/weatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import Profile from "../Profile/Profile";
 
 function App() {
   /***************************************************************************
@@ -22,12 +24,8 @@ function App() {
    ***************************************************************************/
 
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-  console.log(currentTemperatureUnit);
 
   const handleToggleSwitchChange = () => {
-    // currentTemperatureUnit === "F"
-    //   ? setCurrentTemperatureUnit("C")
-    //   : setCurrentTemperatureUnit("F");
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
@@ -72,11 +70,22 @@ function App() {
   return (
     <div className="page">
       <CurrentTemperatureUnitContext.Provider
-        value={(currentTemperatureUnit, handleToggleSwitchChange)}
+        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
         <div className="page__content">
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-          <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                />
+              }
+            />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
           <Footer />
         </div>
         <ModalWithForm

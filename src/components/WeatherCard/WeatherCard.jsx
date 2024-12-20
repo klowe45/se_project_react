@@ -4,10 +4,7 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 import { useContext } from "react";
 
 function WeatherCard({ weatherData }) {
-  const { currentTemperatureUnit, handleToggleSwitchChange } = useContext(
-    CurrentTemperatureUnitContext
-  );
-  console.log(currentTemperatureUnit);
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   const filteredOptions = weatherOptions.filter((option) => {
     return (
