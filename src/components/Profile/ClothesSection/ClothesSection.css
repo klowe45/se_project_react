@@ -14,7 +14,7 @@
   font-weight: 700;
   font-size: 20px;
   line-height: 25px;
-  font-family: "Cabinet Grotesk";
+  font-family: "Cabinet Grotesk", sans-serif;
 }
 
 .clothes__button-add {
@@ -22,7 +22,7 @@
   color: rgba(0, 0, 0, 0.6);
   max-width: 88px;
   max-height: 25px;
-  font-family: "Cabinet Grotesk";
+  font-family: "Cabinet Grotesk", sans-serif;
 }
 
 .clothes__card-list {

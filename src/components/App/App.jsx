@@ -11,24 +11,26 @@ import { getWeather } from "../../utils/weatherApi";
 import { filterWeatherData } from "../../utils/weatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import Profile from "../Profile/Profile";
+import { api } from "../../utils/api";
 
 function App() {
   /***************************************************************************
+   *                             CLOTHING ITEMS                              *
+   **************************************************************************/
+
+  const [clothingItems, setClothingItems] = useState([]);
+
+  /***************************************************************************
    *                              CARD SELECTED                              *
-   ***************************************************************************/
+   **************************************************************************/
 
   const [selectedCard, setSelectedCard] = useState({});
 
   /***************************************************************************
    *                               TOGGLE TEMP                               *
-   ***************************************************************************/
+   **************************************************************************/
 
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-
-  const handleToggleSwitchChange = () => {
-    if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
-    if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
-  };
 
   const [weatherData, setWeatherData] = useState({
     type: "",
@@ -36,9 +38,14 @@ function App() {
     city: "",
   });
 
+  const handleToggleSwitchChange = () => {
+    if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
+    if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
+  };
+
   /***************************************************************************
-   *                                  MODAL                                    *
-   ****************************************************************************/
+   *                                  MODAL                                  *
+   **************************************************************************/
 
   const [activeModal, setActiveModal] = useState("preview-image");
 
@@ -56,13 +63,24 @@ function App() {
   };
 
   /***************************************************************************
-   *                               USE-EFFECT                                  *
-   ****************************************************************************/
+   *                              USE-EFFECT/API                             *
+   **************************************************************************/
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    api
+      .getItems()
+      .then((data) => {
+        setClothingItems(data);
+        console.log(clothingItems);
       })
       .catch(console.error);
   }, []);
@@ -81,10 +99,19 @@ function App() {
                 <Main
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
                 />
               }
             />
-            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                />
+              }
+            />
           </Routes>
           <Footer />
         </div>

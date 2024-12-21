@@ -105,7 +105,7 @@ export const defaultWeatherOptions = {
     url: new URL("../assets/day/clear.png", import.meta.url).href,
   },
   night: {
-    url: new URL("../assests/night/clearNight.png", import.meta.url).href,
+    url: new URL("../assets/night/clearNight.png", import.meta.url).href,
   },
 };
 

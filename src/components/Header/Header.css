@@ -37,3 +37,8 @@
   line-height: 25px;
   font-weight: 700;
 }
+
+.header__profile-link {
+  text-decoration: none;
+  color: #000000;
+}
