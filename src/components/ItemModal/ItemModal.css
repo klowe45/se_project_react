@@ -16,6 +16,11 @@
   display: flex;
   justify-content: space-between;
   background-color: #ffffff;
+  border-radius: 0 0 10px 10px;
+}
+
+.modal__item-description {
+  background-color: #ffffff;
 }
 
 .modal__caption {
