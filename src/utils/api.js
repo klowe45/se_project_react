@@ -30,7 +30,17 @@ const addItems = ({ name, weather, imageUrl }) => {
   }).catch(checkResponse);
 };
 
+const deleteItem = (id) => {
+  return fetch(`${baseUrl}/items/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then(checkResponse);
+};
+
 export const api = {
   getItems,
   addItems,
+  deleteItem,
 };

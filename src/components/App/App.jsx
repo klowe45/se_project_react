@@ -80,11 +80,23 @@ function App() {
       .getItems()
       .then((data) => {
         setClothingItems(data);
-        console.log(clothingItems);
+        // console.log(data);
       })
       .catch(console.error);
   }, []);
 
+  const handleAddItemSubmit = (item) => {
+    api.addItems(item).then((item) => {
+      setClothingItems([item, ...clothingItems]);
+    });
+  };
+
+  const handleDeleteItem = (card) => {
+    api.deleteItem(card._id).then(() => {
+      setClothingItems(clothingItems.filter((c) => c._id !== card._id));
+      closeModal();
+    });
+  };
   return (
     <div className="page">
       <CurrentTemperatureUnitContext.Provider
@@ -121,6 +133,7 @@ function App() {
           activeModal={activeModal}
           closeModal={closeModal}
           isOpen={activeModal === "add-garment"}
+          handleAddItemSubmit={handleAddItemSubmit}
         >
           <label htmlFor="name" className="modal__label">
             Name{""}
@@ -185,6 +198,7 @@ function App() {
           activeModal={activeModal}
           card={selectedCard}
           closeModal={closeModal}
+          handleDeleteItem={handleDeleteItem}
         />
       </CurrentTemperatureUnitContext.Provider>
     </div>
