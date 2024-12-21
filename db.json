@@ -31,25 +31,10 @@
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sweatshirt.png?etag=008a9674757bea2e0bdb31242e364be0"
     },
     {
-      "_id": 17
-    },
-    {
-      "_id": 18
-    },
-    {
-      "_id": 19
-    },
-    {
-      "_id": 20
-    },
-    {
-      "_id": 21
-    },
-    {
-      "_id": 22
-    },
-    {
-      "_id": 23
+      "name": "Beanie",
+      "weather": "cold",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Beanie.png?etag=bc10497cc80fa557f036e94f9999f7b2",
+      "_id": 16
     }
   ]
 }

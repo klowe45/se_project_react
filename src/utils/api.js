@@ -27,7 +27,7 @@ const addItems = ({ name, weather, imageUrl }) => {
       weather,
       imageUrl,
     }),
-  }).catch(checkResponse);
+  }).then(checkResponse);
 };
 
 const deleteItem = (id) => {
