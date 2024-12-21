@@ -62,16 +62,9 @@ function App() {
     setSelectedCard(card);
   };
 
-  const onAddItem = (e) => {
-    e.preventDefault();
-    console.log(e);
-  };
-
-  const [name, setName] = useState("");
-  const handleNameChange = (e) => {
-    console.log(e.target.value);
-    setName(e.target.value);
-  };
+  // const onAddItem = (values) => {
+  //   console.log(values);
+  // };
 
   /***************************************************************************
    *                              USE-EFFECT/API                             *
@@ -91,22 +84,28 @@ function App() {
       .getItems()
       .then((data) => {
         setClothingItems(data);
-        // console.log(data);
       })
       .catch(console.error);
   }, []);
 
   const handleAddItemSubmit = (item) => {
-    api.addItems(item).then((item) => {
-      setClothingItems([item, ...clothingItems]);
-    });
+    api
+      .addItems(item)
+      .then((item) => {
+        setClothingItems([item, ...clothingItems]);
+        closeModal();
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleDeleteItem = (card) => {
-    api.deleteItem(card._id).then(() => {
-      setClothingItems(clothingItems.filter((c) => c._id !== card._id));
-      closeModal();
-    });
+    api
+      .deleteItem(card._id)
+      .then(() => {
+        setClothingItems(clothingItems.filter((c) => c._id !== card._id));
+        closeModal();
+      })
+      .catch((err) => console.elog(err));
   };
   return (
     <div className="page">
@@ -141,10 +140,8 @@ function App() {
         <AddItemModal
           closeModal={closeModal}
           activeModal={activeModal}
-          handleAddItemSubmit={handleAddItemSubmit}
-          onAddItem={onAddItem}
-          handleNameChange={handleNameChange}
-          name={name}
+          onSubmit={handleAddItemSubmit}
+          // onAddItem={onAddItem}
         />
         <ItemModal
           activeModal={activeModal}
