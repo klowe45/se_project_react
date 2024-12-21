@@ -11,7 +11,7 @@ import { filterWeatherData } from "../../utils/weatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import Profile from "../Profile/Profile";
 import { api } from "../../utils/api";
-import AddModalItem from "../AddModalItem";
+import AddItemModal from "../AddItemModal";
 
 function App() {
   /***************************************************************************
@@ -138,7 +138,7 @@ function App() {
           </Routes>
           <Footer />
         </div>
-        <AddModalItem
+        <AddItemModal
           closeModal={closeModal}
           activeModal={activeModal}
           handleAddItemSubmit={handleAddItemSubmit}

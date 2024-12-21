@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import ModalWithForm from "./ModalWithForm/ModalWithForm";
 
-function AddModalItem({
+function AddItemModal({
   activeModal,
   handleAddItemSubmit,
   closeModal,
@@ -75,4 +75,4 @@ function AddModalItem({
   );
 }
 
-export default AddModalItem;
+export default AddItemModal;
