@@ -1,9 +1,13 @@
 .modal__content {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  gap: 0;
 }
 
 .modal__content_type_image {
   max-width: 498px;
-  max-height: 610px;
+  /* max-height: 610px; */
   background-color: #ffffff;
   position: relative;
 }

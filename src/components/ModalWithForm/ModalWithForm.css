@@ -21,7 +21,7 @@
 
 .modal__content {
   max-width: 496px;
-  max-height: 436px;
+  /* max-height: 436px; */
   width: 100%;
   background-color: #ffffff;
   border-radius: 5%;
