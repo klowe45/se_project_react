@@ -47,7 +47,7 @@ function App() {
    *                                  MODAL                                  *
    **************************************************************************/
 
-  const [activeModal, setActiveModal] = useState("preview-image");
+  const [activeModal, setActiveModal] = useState("");
 
   const closeModal = () => {
     setActiveModal("");
