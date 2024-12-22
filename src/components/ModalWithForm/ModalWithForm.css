@@ -55,8 +55,6 @@
   border: none;
   background-color: transparent;
 }
-.modal__label {
-}
 
 .modal__input {
   display: block;
@@ -71,7 +69,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
   padding: 0;
   border: none;
 }
@@ -96,4 +93,10 @@
   max-width: 124px;
   max-height: 36px;
   padding: 8px 15px;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.modal__submit:hover {
+  background-color: rgba(0, 0, 0, 0.5);
 }
