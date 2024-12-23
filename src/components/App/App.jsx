@@ -131,7 +131,7 @@ function App() {
                 <Profile
                   handleCardClick={handleCardClick}
                   clothingItems={clothingItems}
-                  onAddNewClick={() => setActiveModal("add-garment")}
+                  onAddNewClick={handleAddClick}
                 />
               }
             />
