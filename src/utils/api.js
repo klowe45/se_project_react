@@ -8,20 +8,22 @@ export function checkResponse(res) {
   }
 }
 
+const authorization = {
+  "Content-Type": "application/json",
+  authorization: `Bearer ${localStorage.getItem("jwt")}`,
+};
+
 const getItems = () => {
   return fetch(`${baseUrl}/items`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
+    method: "GET",
+    headers: authorization,
   }).then(checkResponse);
 };
 
 const addItems = ({ name, weather, imageUrl }) => {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: authorization,
     body: JSON.stringify({
       name,
       weather,
@@ -33,9 +35,7 @@ const addItems = ({ name, weather, imageUrl }) => {
 const deleteItem = (id) => {
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: authorization,
   }).then(checkResponse);
 };
 
