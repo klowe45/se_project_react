@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import "./Header.css";
 import logo from "../../assets/logo.svg";
-import avatar from "../../assets/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
@@ -34,7 +33,7 @@ function Header({
           <button
             onClick={handleAddClick}
             type="button"
-            className="header__add-cloths-btn"
+            className="header__add-clothes-btn"
           >
             + Add clothes
           </button>

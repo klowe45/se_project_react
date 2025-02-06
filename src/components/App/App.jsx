@@ -81,6 +81,8 @@ function App() {
    *                                  Login                                  *
    **************************************************************************/
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const handleLoginSubmit = ({ email, password }) => {
     auth
       .login({ email, password })
@@ -92,8 +94,6 @@ function App() {
       })
       .catch(console.error);
   };
-
-  const [isLoggedin, setIsLoggedIn] = useState(false);
 
   const handleTokenCheck = (token) => {
     auth
@@ -195,7 +195,7 @@ function App() {
             <Header
               handleAddClick={handleAddClick}
               weatherData={weatherData}
-              isLoggedIn={isLoggedin}
+              isLoggedIn={isLoggedIn}
               handleLoginClick={handleLoginClick}
               handleRegisterClick={handleRegisterClick}
             />
@@ -213,7 +213,7 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute isLoggedIn={isLoggedin} anonymous>
+                  <ProtectedRoute isLoggedIn={isLoggedIn} anonymous>
                     <Profile
                       handleCardClick={handleCardClick}
                       clothingItems={clothingItems}
