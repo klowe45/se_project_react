@@ -63,3 +63,22 @@
   text-transform: uppercase;
   padding: 0;
 }
+
+.header__signup-btn {
+  font-family: "Cabinet Grotesk", sans-serif;
+  border: none;
+  font-weight: 700;
+  line-height: 24px;
+  background-color: #f3f3f3;
+  padding: 0;
+  margin: 0 20px 0 20px;
+}
+
+.header__signin-btn {
+  font-family: "Cabinet Grotesk", sans-serif;
+  border: none;
+  font-weight: 700;
+  line-height: 24px;
+  background-color: #f3f3f3;
+  padding: 0;
+}

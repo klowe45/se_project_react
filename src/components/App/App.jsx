@@ -23,6 +23,7 @@ import RegisterModal from "../../RegisterModal/RegisterModal";
 import LoginModal from "../../LoginModal/LoginModal";
 import ProtectedRoute from "../../ProtectedRoute/ProtectedRoute";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 function App() {
   /***************************************************************************
@@ -65,16 +66,25 @@ function App() {
    **************************************************************************/
 
   const handleRegistrationSubmit = ({ email, password, name, avatar }) => {
-    auth
-      .register({ email, password, name, avatar })
-      .then((email, name, avatar) => {
-        setUser({ email, name, avatar });
-        closeModal();
-      })
-      .catch(console.error)
-      .finally(() => {
-        console.log("submited register");
-      });
+    if (email && password && name && avatar) {
+      auth
+        .register({ email, password, name, avatar })
+        .then((res) => {
+          if (res.token) {
+            localStorage.setItem("jwt", res.token);
+            return auth.checkForToken(res.token);
+          }
+        })
+        .then((user) => {
+          setUser(user);
+          setIsLoggedIn(true);
+          closeModal();
+        })
+        .catch(console.error)
+        .finally(() => {
+          console.log("submited register");
+        });
+    }
   };
 
   /***************************************************************************
@@ -100,13 +110,27 @@ function App() {
       .checkForToken(token)
       .then((data) => {
         setUser(data);
-        setIsLoggedIn(true);
+        setIsLoggedIn(false);
       })
       .catch(() => {
         localStorage.removeItem("jwt");
         setUser({});
         setIsLoggedIn(false);
       });
+  };
+
+  /***************************************************************************
+   *                                  Edit Profile                           *
+   **************************************************************************/
+
+  const handleProfileSubmit = ({ name, avatar }) => {
+    api
+      .profileEdited(token, name, avatar)
+      .then((res) => {
+        setUser(res);
+        closeModal();
+      })
+      .catch(console.error);
   };
 
   /***************************************************************************
@@ -134,6 +158,10 @@ function App() {
 
   const handleLoginClick = () => {
     setActiveModal("login");
+  };
+
+  const handleEditProfileClick = () => {
+    setActiveModal("edit-profile");
   };
 
   /***************************************************************************
@@ -182,6 +210,8 @@ function App() {
     if (localStorage.getItem("jwt")) {
       const token = localStorage.getItem("jwt");
       handleTokenCheck(token);
+    } else {
+      return;
     }
   }, []);
 
@@ -245,6 +275,11 @@ function App() {
             activeModal={activeModal}
             closeModal={closeModal}
             handleLoginSubmit={handleLoginSubmit}
+          />
+          <EditProfileModal
+            activeModal={activeModal}
+            handleProfileSubmit={handleProfileSubmit}
+            closeModal={closeModal}
           />
         </CurrentTemperatureUnitContext.Provider>
       </div>

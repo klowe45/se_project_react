@@ -39,8 +39,20 @@ const deleteItem = (id) => {
   }).then(checkResponse);
 };
 
+const profileEdited = (token, name, avatar) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, avatar }),
+  });
+};
+
 export const api = {
   getItems,
   addItems,
   deleteItem,
+  profileEdited,
 };

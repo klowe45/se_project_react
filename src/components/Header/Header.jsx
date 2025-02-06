@@ -47,8 +47,9 @@ function Header({
                   alt="avatar"
                 />
               ) : (
+                //add currentUser.name back {currentUser.charAt(0).toUpperCase()}
                 <div className="header__avatar header__avatar_backUp">
-                  {currentUser?.name?.charAt(0).toUpperCase() || ""}
+                  <p>H</p>
                 </div>
               )}
             </div>
