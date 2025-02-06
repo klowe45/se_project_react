@@ -66,25 +66,23 @@ function App() {
    **************************************************************************/
 
   const handleRegistrationSubmit = ({ email, password, name, avatar }) => {
-    if (email && password && name && avatar) {
-      auth
-        .register({ email, password, name, avatar })
-        .then((res) => {
-          if (res.token) {
-            localStorage.setItem("jwt", res.token);
-            return auth.checkForToken(res.token);
-          }
-        })
-        .then((user) => {
-          setUser(user);
-          setIsLoggedIn(true);
-          closeModal();
-        })
-        .catch(console.error)
-        .finally(() => {
-          console.log("submited register");
-        });
-    }
+    auth
+      .register({ email, password, name, avatar })
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
+          return auth.checkForToken(res.token);
+        }
+      })
+      .then((user) => {
+        setUser(user);
+        setIsLoggedIn(true);
+        closeModal();
+      })
+      .catch(console.error)
+      .finally(() => {
+        console.log("submited register");
+      });
   };
 
   /***************************************************************************

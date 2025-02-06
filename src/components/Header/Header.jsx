@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React from "react";
 import "./Header.css";
 import logo from "../../assets/logo.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
@@ -17,7 +17,7 @@ function Header({
     day: "numeric",
   });
 
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = React.useContext(CurrentUserContext);
 
   return (
     <header className="header">

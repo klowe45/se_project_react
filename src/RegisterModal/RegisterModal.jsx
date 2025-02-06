@@ -1,19 +1,11 @@
 import { React, useState } from "react";
 import ModalWithForm from "../components/ModalWithForm/ModalWithForm";
-//import { useForm } from "../Hooks/hook";
 
 function RegisterModal({ activeModal, closeModal, handleRegistrationSubmit }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
-  /*const { value, handleChange, setValues } = useForm({
-    _id: null,
-    email: "",
-    password: "",
-    name: "",
-    avatar: "",
-  });*/
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -52,7 +44,7 @@ function RegisterModal({ activeModal, closeModal, handleRegistrationSubmit }) {
           id="email"
           className="modal__input"
           placeholder="Email"
-          value={email.value}
+          value={email}
           onChange={handleEmailChange}
         />
       </label>
@@ -63,7 +55,7 @@ function RegisterModal({ activeModal, closeModal, handleRegistrationSubmit }) {
           id="password"
           className="modal__input"
           placeholder="Password"
-          value={password.value}
+          value={password}
           onChange={handlePasswordChange}
         />
       </label>
@@ -74,7 +66,7 @@ function RegisterModal({ activeModal, closeModal, handleRegistrationSubmit }) {
           id="name"
           className="modal__input"
           placeholder="Name"
-          value={name.value}
+          value={name}
           onChange={handleNameChange}
         />
       </label>
@@ -85,7 +77,7 @@ function RegisterModal({ activeModal, closeModal, handleRegistrationSubmit }) {
           id="Avatar"
           className="modal__input"
           placeholder="Avatar URL"
-          value={avatar.value}
+          value={avatar}
           onChange={handleAvatarChange}
         />
       </label>
