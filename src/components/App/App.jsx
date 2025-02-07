@@ -93,7 +93,7 @@ function App() {
 
   const handleLoginSubmit = ({ email, password }) => {
     auth
-      .login({ email, password })
+      .login(email, password)
       .then((data) => {
         localStorage.setItem("jwt", data.token);
         setUser(data.user);
@@ -108,7 +108,7 @@ function App() {
       .checkForToken(token)
       .then((data) => {
         setUser(data);
-        setIsLoggedIn(false);
+        setIsLoggedIn(true);
       })
       .catch(() => {
         localStorage.removeItem("jwt");
