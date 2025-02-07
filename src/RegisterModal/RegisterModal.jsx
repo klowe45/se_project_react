@@ -1,32 +1,32 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import ModalWithForm from "../components/ModalWithForm/ModalWithForm";
+import { useForm } from "../Hooks/hook";
 
 function RegisterModal({ activeModal, closeModal, handleRegistrationSubmit }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
+  const { values, handleChange, setValues } = useForm({
+    email: "",
+    password: "",
+    name: "",
+    avatar: "",
+  });
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleAvatarChange = (e) => {
-    setAvatar(e.target.value);
+  const handleResetInputs = () => {
+    setEmail("");
+    setPassword("");
+    setName("");
+    setAvatar("");
   };
 
   const onRegistration = (e) => {
     e.preventDefault();
-    handleRegistrationSubmit(email, password, name, avatar);
+    handleRegistrationSubmit(values);
   };
+
+  useEffect(handleResetInputs, [activeModal]);
 
   return (
     <ModalWithForm
@@ -45,8 +45,8 @@ function RegisterModal({ activeModal, closeModal, handleRegistrationSubmit }) {
           id="email"
           className="modal__input"
           placeholder="Email"
-          value={email}
-          onChange={handleEmailChange}
+          value={values.email}
+          onChange={handleChange}
         />
       </label>
       <label htmlFor="password" className="modal__label">
@@ -57,8 +57,8 @@ function RegisterModal({ activeModal, closeModal, handleRegistrationSubmit }) {
           id="password"
           className="modal__input"
           placeholder="Password"
-          value={password}
-          onChange={handlePasswordChange}
+          value={values.password}
+          onChange={handleChange}
         />
       </label>
       <label htmlFor="name" className="modal__label">
@@ -69,8 +69,8 @@ function RegisterModal({ activeModal, closeModal, handleRegistrationSubmit }) {
           id="name"
           className="modal__input"
           placeholder="Name"
-          value={name}
-          onChange={handleNameChange}
+          value={values.name}
+          onChange={handleChange}
         />
       </label>
       <label htmlFor="avatar" className="modal__label">
@@ -81,8 +81,8 @@ function RegisterModal({ activeModal, closeModal, handleRegistrationSubmit }) {
           id="Avatar"
           className="modal__input"
           placeholder="Avatar URL"
-          value={avatar}
-          onChange={handleAvatarChange}
+          value={values.avatar}
+          onChange={handleChange}
         />
       </label>
     </ModalWithForm>

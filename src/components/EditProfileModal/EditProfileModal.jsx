@@ -2,20 +2,19 @@ import { React, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../Hooks/hook";
 
-const profileEditSubmit = (e) => {
-  e.preventDefault();
-  handleProfileSubmit(value);
-};
-
 function EditProfileModal({ activeModal, closeModal, handleProfileSubmit }) {
-  const { value, handleChange, setValues } = useForm({
+  const [name, setName] = useState("");
+  const [avatar, setAvatar] = useState("");
+  const { values, handleChange, setValues } = useForm({
     name: "",
     avatar: "",
   });
+
   const profileEditSubmit = (e) => {
     e.preventDefault();
-    handleProfileSubmit(value);
+    handleProfileSubmit(values);
   };
+
   return (
     <ModalWithForm
       titleText="Change profile data"
@@ -29,10 +28,11 @@ function EditProfileModal({ activeModal, closeModal, handleProfileSubmit }) {
         Email*{""}
         <input
           type="text"
+          name="name"
           id="name"
           className="modal_input"
           placeholder="Enter Name"
-          value={value.name}
+          value={name}
           onChange={handleChange}
         />
       </label>
@@ -40,10 +40,11 @@ function EditProfileModal({ activeModal, closeModal, handleProfileSubmit }) {
         Avatar*{""}
         <input
           type="text"
+          name="avatar"
           id="name"
           className="modal_input"
           placeholder="Enter Url"
-          value={value.avatar}
+          value={avatar}
           onChange={handleChange}
         />
       </label>
