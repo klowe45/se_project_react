@@ -96,6 +96,17 @@ function App() {
       })
       .catch((err) => {
         console.error("Error during registration process:", err);
+        if (err.response) {
+          console.error(
+            "Server responded with:",
+            err.response.status,
+            err.response.data
+          );
+        } else if (err.request) {
+          console.error("No response received from server:", err.request);
+        } else {
+          console.error("Request setup error:", err.message);
+        }
       })
       .finally(() => {
         console.log("submited register");
