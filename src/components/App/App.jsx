@@ -67,7 +67,7 @@ function App() {
 
   const handleRegistrationSubmit = ({ email, password, name, avatar }) => {
     auth
-      .register({ email, password, name, avatar })
+      .register(email, password, name, avatar)
       .then((res) => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
@@ -214,7 +214,7 @@ function App() {
   }, []);
 
   return (
-    <CurrentUserContext.Provider value={user}>
+    <CurrentUserContext.Provider value={{ currentUser: user }}>
       <div className="page">
         <CurrentTemperatureUnitContext.Provider
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}

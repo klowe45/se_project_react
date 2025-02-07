@@ -23,7 +23,7 @@ export const login = ({ email, password }) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  });
+  }).then(checkResponse);
 };
 
 export const checkForToken = (token) => {
@@ -33,5 +33,5 @@ export const checkForToken = (token) => {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-  });
+  }).then(checkResponse);
 };
