@@ -65,7 +65,7 @@ function App() {
    *                                  Registration                           *
    **************************************************************************/
 
-  const handleRegistrationSubmit = ({ email, password, name, avatar }) => {
+  const handleRegistrationSubmit = (email, password, name, avatar) => {
     console.log("Submitting registration with:", {
       email,
       password,
