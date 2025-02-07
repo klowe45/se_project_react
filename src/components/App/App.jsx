@@ -65,7 +65,7 @@ function App() {
    *                                  Registration                           *
    **************************************************************************/
 
-  const handleRegistrationSubmit = (email, password, name, avatar) => {
+  const handleRegistrationSubmit = ({ email, password, name, avatar }) => {
     console.log("Submitting registration with:", {
       email,
       password,
@@ -74,43 +74,11 @@ function App() {
     });
     auth
       .register(email, password, name, avatar)
-      .then((res) => {
-        console.log("Registration response:", res);
-        if (!res || !res.email || !res.password) {
-          throw new Error("Invalid response from register API");
-        }
-        return auth.login(res.email, res.password).then((res) => {
-          console.log("Login response:", res);
-          if (!res.token) {
-            throw new Error("No token received from login API");
-          }
-          localStorage.setItem("jwt", res.token);
-          return auth.checkForToken(res.token);
-        });
-      })
-      .then(({ name, email, avatar }) => {
-        console.log("User data received:", { name, email, avatar });
-        setUser({ name, email, avatar });
-        setIsLoggedIn(true);
+      .then(() => {
+        handleLoginSubmit({ email, password });
         closeModal();
       })
-      .catch((err) => {
-        console.error("Error during registration process:", err);
-        if (err.response) {
-          console.error(
-            "Server responded with:",
-            err.response.status,
-            err.response.data
-          );
-        } else if (err.request) {
-          console.error("No response received from server:", err.request);
-        } else {
-          console.error("Request setup error:", err.message);
-        }
-      })
-      .finally(() => {
-        console.log("submited register");
-      });
+      .catch(console.error);
   };
 
   /***************************************************************************
@@ -124,8 +92,7 @@ function App() {
       .login(email, password)
       .then((data) => {
         localStorage.setItem("jwt", data.token);
-        setUser(data.user);
-        setIsLoggedIn(true);
+        handleTokenCheck(data.token);
         closeModal();
       })
       .catch(console.error);
