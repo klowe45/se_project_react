@@ -12,7 +12,7 @@ export const register = (email, passwrod, name, avatar) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, passwrod, name, avatar }),
-  });
+  }).then(checkResponse);
 };
 
 export const login = ({ email, password }) => {

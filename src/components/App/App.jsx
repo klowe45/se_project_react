@@ -65,14 +65,14 @@ function App() {
    *                                  Registration                           *
    **************************************************************************/
 
-  const handleRegistrationSubmit = ({ email, password, name, avatar }) => {
+  const handleRegistrationSubmit = (email, password, name, avatar) => {
     auth
       .register(email, password, name, avatar)
       .then((res) => {
-        if (res.token) {
+        return auth.login(email, password).then((res) => {
           localStorage.setItem("jwt", res.token);
           return auth.checkForToken(res.token);
-        }
+        });
       })
       .then((user) => {
         setUser(user);
