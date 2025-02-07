@@ -73,7 +73,7 @@ function App() {
       avatar,
     });
     auth
-      .register({ email, password, name, avatar })
+      .register(email, password, name, avatar)
       .then((res) => {
         console.log("Registration response:", res);
         if (!res || !res.email || !res.password) {
