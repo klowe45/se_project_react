@@ -41,6 +41,7 @@ function RegisterModal({ activeModal, closeModal, handleRegistrationSubmit }) {
         Email*{""}
         <input
           type="email"
+          name="email"
           id="email"
           className="modal__input"
           placeholder="Email"
@@ -52,6 +53,7 @@ function RegisterModal({ activeModal, closeModal, handleRegistrationSubmit }) {
         Password*{""}
         <input
           type="text"
+          name="password"
           id="password"
           className="modal__input"
           placeholder="Password"
@@ -63,6 +65,7 @@ function RegisterModal({ activeModal, closeModal, handleRegistrationSubmit }) {
         Name*{""}
         <input
           type="text"
+          name="name"
           id="name"
           className="modal__input"
           placeholder="Name"
@@ -74,6 +77,7 @@ function RegisterModal({ activeModal, closeModal, handleRegistrationSubmit }) {
         Avatar*{""}
         <input
           type="text"
+          name="avatar"
           id="Avatar"
           className="modal__input"
           placeholder="Avatar URL"
