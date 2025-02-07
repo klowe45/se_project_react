@@ -76,6 +76,9 @@ function App() {
       .register({ email, password, name, avatar })
       .then((res) => {
         console.log("Registration response:", res);
+        if (!res || !res.email || !res.password) {
+          throw new Error("Invalid response from register API");
+        }
         return auth.login(res.email, res.password).then((res) => {
           console.log("Login response:", res);
           if (!res.token) {
