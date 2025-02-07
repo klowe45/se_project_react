@@ -65,21 +65,35 @@ function App() {
    *                                  Registration                           *
    **************************************************************************/
 
-  const handleRegistrationSubmit = (email, password, name, avatar) => {
+  const handleRegistrationSubmit = ({ email, password, name, avatar }) => {
+    console.log("Submitting registration with:", {
+      email,
+      password,
+      name,
+      avatar,
+    });
     auth
-      .register(email, password, name, avatar)
+      .register({ email, password, name, avatar })
       .then((res) => {
+        console.log("Registration response:", res);
         return auth.login(res.email, res.password).then((res) => {
+          console.log("Login response:", res);
+          if (!res.token) {
+            throw new Error("No token received from login API");
+          }
           localStorage.setItem("jwt", res.token);
           return auth.checkForToken(res.token);
         });
       })
-      .then((user) => {
-        setUser(user);
+      .then(({ name, email, avatar }) => {
+        console.log("User data received:", { name, email, avatar });
+        setUser({ name, email, avatar });
         setIsLoggedIn(true);
         closeModal();
       })
-      .catch(console.error)
+      .catch((err) => {
+        console.error("Error during registration process:", err);
+      })
       .finally(() => {
         console.log("submited register");
       });
