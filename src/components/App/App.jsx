@@ -69,7 +69,7 @@ function App() {
     auth
       .register(email, password, name, avatar)
       .then((res) => {
-        return auth.login(email, password).then((res) => {
+        return auth.login({ email, password }).then((res) => {
           localStorage.setItem("jwt", res.token);
           return auth.checkForToken(res.token);
         });
