@@ -31,6 +31,38 @@ function App() {
    **************************************************************************/
 
   const [clothingItems, setClothingItems] = useState([]);
+  console.log(clothingItems);
+
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = localStorage.getItem("jwt");
+    !isLiked
+      ? api
+          .addCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.log(err))
+      : api
+          .removeCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.log(err));
+  };
+
+  const handleDeleteItem = (card) => {
+    api
+      .deleteItem(card._id)
+      .then(() => {
+        setClothingItems(clothingItems.filter((c) => c._id !== card._id));
+        closeModal();
+      })
+      .catch((err) => console.elog(err));
+  };
 
   /***************************************************************************
    *                              CARD SELECTED                              *
@@ -116,14 +148,19 @@ function App() {
    *                                  Edit Profile                           *
    **************************************************************************/
 
-  const handleProfileSubmit = ({ name, avatar }) => {
+  const handleProfileSubmit = ({ name, avatar, _id }) => {
+    const token = localStorage.getItem("jwt");
     api
-      .profileEdited(token, name, avatar)
-      .then((res) => {
-        setUser(res);
+      .profileEdited(name, avatar, _id, token)
+      .then((data) => {
+        console.log(data);
+        setUser(data);
         closeModal();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => {
+        console.log("Profile updated");
+      });
   };
 
   /***************************************************************************
@@ -189,16 +226,6 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const handleDeleteItem = (card) => {
-    api
-      .deleteItem(card._id)
-      .then(() => {
-        setClothingItems(clothingItems.filter((c) => c._id !== card._id));
-        closeModal();
-      })
-      .catch((err) => console.elog(err));
-  };
-
   useEffect(() => {
     if (localStorage.getItem("jwt")) {
       const token = localStorage.getItem("jwt");
@@ -207,7 +234,6 @@ function App() {
       return;
     }
   }, []);
-
   return (
     <CurrentUserContext.Provider value={{ currentUser: user }}>
       <div className="page">
@@ -229,6 +255,8 @@ function App() {
                   <Main
                     weatherData={weatherData}
                     handleCardClick={handleCardClick}
+                    onCardLike={handleCardLike}
+                    onCardlike={handleAddClick}
                     clothingItems={clothingItems}
                   />
                 }
@@ -241,6 +269,7 @@ function App() {
                       handleCardClick={handleCardClick}
                       clothingItems={clothingItems}
                       onAddNewClick={handleAddClick}
+                      handleEditProfileClick={handleEditProfileClick}
                     />
                   </ProtectedRoute>
                 }

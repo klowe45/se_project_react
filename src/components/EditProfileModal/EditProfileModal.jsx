@@ -1,6 +1,7 @@
-import { React, useState } from "react";
+import { React, useContext, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../Hooks/hook";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function EditProfileModal({ activeModal, closeModal, handleProfileSubmit }) {
   const [name, setName] = useState("");
@@ -10,6 +11,8 @@ function EditProfileModal({ activeModal, closeModal, handleProfileSubmit }) {
     avatar: "",
   });
 
+  const currentUser = useContext(CurrentUserContext);
+
   const profileEditSubmit = (e) => {
     e.preventDefault();
     handleProfileSubmit(values);
@@ -18,33 +21,33 @@ function EditProfileModal({ activeModal, closeModal, handleProfileSubmit }) {
   return (
     <ModalWithForm
       titleText="Change profile data"
-      buttonText="Change profile data"
+      buttonText="Save changes"
       activeModal={activeModal}
       closeModal={closeModal}
-      isOpen={activeModal === "profile-edit"}
+      isOpen={activeModal === "edit-profile"}
       onSubmit={profileEditSubmit}
     >
-      <label htmlFor="name" className="modal_label">
-        Email*{""}
+      <label htmlFor="name" className="modal__label">
+        Name*{""}
         <input
           type="text"
           name="name"
           id="name"
-          className="modal_input"
-          placeholder="Enter Name"
-          value={name}
+          className="modal__input"
+          placeholder={currentUser.name}
+          value={values.name}
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="avatar" className="modal_label">
+      <label htmlFor="avatar" className="modal__label">
         Avatar*{""}
         <input
           type="text"
           name="avatar"
-          id="name"
-          className="modal_input"
-          placeholder="Enter Url"
-          value={avatar}
+          id="avatar"
+          className="modal__input"
+          placeholder={currentUser.avatar}
+          value={values.avatar}
           onChange={handleChange}
         />
       </label>
