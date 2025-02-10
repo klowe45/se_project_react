@@ -4,9 +4,11 @@ import "./Main.css";
 import { useContext } from "react";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
-function Main({ weatherData, handleCardClick, onCardlike, clothingItems }) {
+function Main({ weatherData, handleCardClick, onCardlike }) {
   //console.log(clothingItems);
-  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+  const { currentTemperatureUnit, clothingItems } = useContext(
+    CurrentTemperatureUnitContext
+  );
   const sortedItems = clothingItems.fliter(
     (item) => item.weather === weatherData.type
   );
