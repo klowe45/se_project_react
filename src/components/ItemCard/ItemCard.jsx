@@ -10,7 +10,7 @@ function ItemCard({ item, handleCardClick, onCardLike }) {
     handleCardClick(item);
   };
 
-  const isLiked = item.likes.some((id) => id === currentUser?.userId);
+  let isLiked = item.likes.some((id) => id === currentUser?.userId);
 
   const [isCurrentlyLiked, setIsCurrentlyLiked] = useState(isLiked || false);
 
@@ -21,12 +21,12 @@ function ItemCard({ item, handleCardClick, onCardLike }) {
   };
 
   useEffect(() => {
-    const currnetItem = clothingItems.find(
-      (clothingItem) => clothingItem._id === id
+    const currentItem = clothingItems.find(
+      (clothingItem) => clothingItem._id === item._id
     );
-    if (clothingItem) {
-      isLiked = currnetItem.likes.some(
-        (cardKey) => cardKey === userData?.userId
+    if (currentItem) {
+      isLiked = currentItem.likes.some(
+        (cardKey) => cardKey === currentUser?.userId
       );
       setIsCurrentlyLiked(isLiked);
     }

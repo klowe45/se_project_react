@@ -3,15 +3,16 @@ import ItemCard from "../ItemCard/ItemCard";
 import "./Main.css";
 import { useContext } from "react";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function Main({ weatherData, handleCardClick, onCardlike }) {
   //console.log(clothingItems);
-  const { currentTemperatureUnit, clothingItems } = useContext(
-    CurrentTemperatureUnitContext
-  );
-  const sortedItems = clothingItems.fliter(
-    (item) => item.weather === weatherData.type
-  );
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+
+  const { clothingItems } = useContext(CurrentUserContext);
+
+  const sortedItems = () =>
+    clothingItems.fliter((item) => item.weather === weatherData.type);
 
   let itemCards = [];
 
