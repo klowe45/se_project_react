@@ -31,7 +31,6 @@ function App() {
    **************************************************************************/
 
   const [clothingItems, setClothingItems] = useState([]);
-  console.log(clothingItems);
 
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");

@@ -7,13 +7,13 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 function Main({ weatherData, handleCardClick, onCardlike, clothingItems }) {
   //console.log(clothingItems);
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-  /*const sortedItems = clothingItems.fliter(
+  const sortedItems = clothingItems.fliter(
     (item) => item.weather === weatherData.type
-  );*/
+  );
 
   let itemCards = [];
 
-  /*for (let i = 0; i < sortedItems.length; i++) {
+  for (let i = 0; i < sortedItems.length; i++) {
     if (itemCards.length !== sortedItems.length) {
       const item = sortedItems[i];
       itemCards.push(
@@ -22,11 +22,10 @@ function Main({ weatherData, handleCardClick, onCardlike, clothingItems }) {
           item={item}
           handleCardClick={handleCardClick}
           onCardlike={onCardlike}
-          clothingItems={clothingItems}
         />
       );
     }
-  }*/
+  }
 
   return (
     <main>
@@ -36,6 +35,7 @@ function Main({ weatherData, handleCardClick, onCardlike, clothingItems }) {
           Today is {weatherData.temp[currentTemperatureUnit]} &deg; / You may
           want to wear:
         </p>
+        <ul className=".main__cards-list">{itemCards}</ul>
       </section>
     </main>
   );
