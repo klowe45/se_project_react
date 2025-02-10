@@ -257,7 +257,7 @@ function App() {
                     weatherData={weatherData}
                     handleCardClick={handleCardClick}
                     onCardLike={handleCardLike}
-                    onCardlike={handleAddClick}
+                    onCardClick={handleAddClick}
                     clothingItems={clothingItems}
                   />
                 }

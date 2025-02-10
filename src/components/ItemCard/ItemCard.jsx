@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import likeButton from "../../assets/like-button.svg";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function ItemCard({ item, handleCardClick, onCardLike }) {
+function ItemCard({ id, item, handleCardClick, onCardLike }) {
   const { currentUser, isLoggedIn, clothingItems } =
     useContext(CurrentUserContext);
   const handleCardPreview = () => {
@@ -11,6 +11,7 @@ function ItemCard({ item, handleCardClick, onCardLike }) {
   };
 
   let isLiked = item.likes.some((id) => id === currentUser?.userId);
+  const cardKey = id;
 
   const [isCurrentlyLiked, setIsCurrentlyLiked] = useState(isLiked || false);
 
