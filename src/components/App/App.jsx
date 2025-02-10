@@ -234,7 +234,9 @@ function App() {
     }
   }, []);
   return (
-    <CurrentUserContext.Provider value={{ currentUser: user }}>
+    <CurrentUserContext.Provider
+      value={{ currentUser: user, clothingItems, isLoggedIn }}
+    >
       <div className="page">
         <CurrentTemperatureUnitContext.Provider
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
