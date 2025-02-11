@@ -364,7 +364,6 @@ function App() {
           />
           <DeleteModal
             activeModal={activeModal}
-            handleDeleteClick={handleDeleteClick}
             handleDeleteConfirmation={handleDeleteConfirmation}
             closeModal={closeModal}
             handleDeleteItem={handleDeleteItem}

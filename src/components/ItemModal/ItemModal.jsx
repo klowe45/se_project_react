@@ -6,9 +6,9 @@ function ItemModal({ activeModal, closeModal, card, handleDeleteClick }) {
   const { currentUser } = useContext(CurrentUserContext);
 
   const cardId = card._id;
-  const DeleteModal = () => {
+  /*const DeleteModal = () => {
     handleDeleteClick(cardId);
-  };
+  };*/
 
   const isOwn = currentUser && card.owner === currentUser._id;
   const itemDeleteButtonClassName = `modal__button-delete ${
@@ -33,7 +33,7 @@ function ItemModal({ activeModal, closeModal, card, handleDeleteClick }) {
           </div>
 
           <button
-            onClick={DeleteModal}
+            onClick={handleDeleteClick}
             className={`modal__button-delete ${itemDeleteButtonClassName}`}
           >
             Delete Item

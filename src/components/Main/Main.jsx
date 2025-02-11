@@ -5,26 +5,27 @@ import { useContext } from "react";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function Main({ weatherData, handleCardClick, handleCardLike }) {
+function Main({ weatherData, handleCardClick, handleCardLike, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
-  const { clothingItems } = useContext(CurrentUserContext);
+  //const { clothingItems } = useContext(CurrentUserContext);
 
-  const sortedItems = () =>
-    clothingItems.fliter((item) => item.weather === weatherData.type);
+  const filteredItems = clothingItems.filter(
+    (item) => item.weather === weatherData.type
+  );
 
   let itemCards = [];
 
-  for (let i = 0; i < sortedItems.length; i++) {
-    if (itemCards.length !== sortedItems.length) {
-      const item = sortedItems[i];
+  for (let i = 0; i < filteredItems.length; i++) {
+    if (itemCards.length !== filteredItems.length) {
+      const item = filteredItems[i];
       itemCards.push(
         <ItemCard
-          id={item._id}
+          key={i}
+          id={item.id}
           item={item}
           handleCardClick={handleCardClick}
           handleCardLike={handleCardLike}
-          handleDeleteClick={handleDeleteClick}
         />
       );
     }
