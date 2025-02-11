@@ -3,7 +3,8 @@ import "./ItemModal.css";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function ItemModal({ activeModal, closeModal, card, handleDeleteItem }) {
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
+  const cardId = card._id;
   const isOwn = currentUser && card.owner === currentUser._id;
 
   return (
