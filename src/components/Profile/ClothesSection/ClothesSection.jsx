@@ -23,7 +23,7 @@ function ClothesSection({
       itemCards.push(
         <ItemCard
           key={i}
-          id={item._id}
+          id={item.id}
           item={item}
           handleCardClick={handleCardClick}
           handleCardLike={handleCardLike}

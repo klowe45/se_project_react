@@ -24,6 +24,7 @@ function Main({ weatherData, handleCardClick, handleCardLike }) {
           item={item}
           handleCardClick={handleCardClick}
           handleCardLike={handleCardLike}
+          handleDeleteClick={handleDeleteClick}
         />
       );
     }
@@ -37,7 +38,7 @@ function Main({ weatherData, handleCardClick, handleCardLike }) {
           Today is {weatherData.temp[currentTemperatureUnit]} &deg; / You may
           want to wear:
         </p>
-        <ul className=".main__cards-list">{itemCards}</ul>
+        <ul className="main__cards-list">{itemCards}</ul>
       </section>
     </main>
   );

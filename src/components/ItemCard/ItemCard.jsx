@@ -6,32 +6,31 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 function ItemCard({ id, item, handleCardClick, handleCardLike }) {
   const { currentUser, isLoggedIn, clothingItems } =
     useContext(CurrentUserContext);
+
   const handleCardPreview = () => {
     handleCardClick(item);
   };
+  const cardKey = item._id;
 
-  let isLiked = item.likes.some((id) => id === currentUser?.userId);
-  const cardKey = id;
-
-  const [isCurrentlyLiked, setIsCurrentlyLiked] = useState(isLiked || false);
-
-  const itemLikeButtonClassName = `card__like-btn_is-liked`;
-
-  const handleCardLikeState = () => {
-    handleCardLike(cardKey, isCurrentlyLiked);
-  };
+  let isLiked = item.likes.includes(currentUser?._id);
+  const [isCurrentlyLiked, setIsCurrentlyLiked] = useState(isLiked);
 
   useEffect(() => {
+    if (!clothingItems?.length || !id || !currentUser) return;
     const currentItem = clothingItems.find(
-      (clothingItem) => clothingItem._id === item._id
+      (clothingItem) => clothingItem._id === id
     );
     if (currentItem) {
-      isLiked = currentItem.likes.some(
-        (cardKey) => cardKey === currentUser?.userId
-      );
-      setIsCurrentlyLiked(isLiked);
+      setIsCurrentlyLiked(currentItem.likes.includes(currentUser?._id));
     }
-  }, [clothingItems]);
+  }, [clothingItems, id, currentUser]);
+
+  const handleCardLikeState = () => {
+    handleCardLike(cardKey, !isCurrentlyLiked);
+    setIsCurrentlyLiked((prevState) => !prevState);
+  };
+
+  const itemLikeButtonClassName = `card__like-btn_is-liked`;
 
   return (
     <li className="card">

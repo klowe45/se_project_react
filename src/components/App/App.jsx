@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import {
   Route,
   Routes,
@@ -24,6 +24,7 @@ import LoginModal from "../../LoginModal/LoginModal";
 import ProtectedRoute from "../../ProtectedRoute/ProtectedRoute";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import DeleteModal from "../../components/DeleteModal/DeleteModal";
 
 function App() {
   /***************************************************************************
@@ -32,27 +33,45 @@ function App() {
 
   const [clothingItems, setClothingItems] = useState([]);
 
-  const handleCardLike = ({ id, isLiked }) => {
+  const handleCardLike = (id, isLiked) => {
     const token = localStorage.getItem("jwt");
-    !isLiked
-      ? api
-          .addCardLike(id, token)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
-            );
-          })
-          .catch((err) => console.log(err))
-      : api
-          .removeCardLike(id, token)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
-            );
-          })
-          .catch((err) => console.log(err));
-  };
 
+    if (!token) {
+      console.log("No token found");
+      return;
+    }
+
+    if (!isLiked) {
+      api
+        .addCardLike(id, token)
+        .then(() => {
+          setClothingItems((cards) =>
+            cards.map((item) =>
+              item._id === id
+                ? { ...item, likes: [...item.likes, user.userId] }
+                : item
+            )
+          );
+        })
+        .catch((err) => console.log(err));
+    } else {
+      api
+        .removeCardLike(id, token)
+        .then(() => {
+          setClothingItems((cards) =>
+            cards.map((item) =>
+              item._id === id
+                ? {
+                    ...item,
+                    likes: item.likes.filter((id) => id !== user.userId),
+                  }
+                : item
+            )
+          );
+        })
+        .catch((err) => console.log(err));
+    }
+  };
   const handleDeleteItem = (card) => {
     api
       .deleteItem(card._id)
@@ -142,6 +161,17 @@ function App() {
         setIsLoggedIn(false);
       });
   };
+  /***************************************************************************
+   *                                  Log out                                *
+   **************************************************************************/
+
+  const handleLogOut = () => {
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("user");
+
+    setIsLoggedIn(false);
+    setUser(null);
+  };
 
   /***************************************************************************
    *                                  Edit Profile                           *
@@ -160,6 +190,21 @@ function App() {
       .finally(() => {
         console.log("Profile updated");
       });
+  };
+
+  /***************************************************************************
+   *                               Delete Item                              *
+   **************************************************************************/
+
+  const handleDeleteConfirmation = () => {
+    const cardId = selectedCard._id;
+    api.deleteItem(cardId).then(() => {
+      setClothingItems((prevItems) =>
+        prevItems.filter((item) => item._id !== cardId)
+      );
+      setSelectedCard({});
+      closeModal();
+    });
   };
 
   /***************************************************************************
@@ -192,6 +237,16 @@ function App() {
   const handleEditProfileClick = () => {
     setActiveModal("edit-profile");
   };
+
+  const handleDeleteClick = () => {
+    setActiveModal("delete-modal");
+  };
+
+  /***************************************************************************
+   *                              DOM UPDATES                                *
+   **************************************************************************/
+
+  const [updateDom, setUpdateDom] = useState(false);
 
   /***************************************************************************
    *                              USE-EFFECT/API                             *
@@ -272,10 +327,12 @@ function App() {
                       clothingItems={clothingItems}
                       onAddNewClick={handleAddClick}
                       handleEditProfileClick={handleEditProfileClick}
+                      handleLogOut={handleLogOut}
                     />
                   </ProtectedRoute>
                 }
               />
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
             <Footer />
           </div>
@@ -288,7 +345,7 @@ function App() {
             activeModal={activeModal}
             card={selectedCard}
             closeModal={closeModal}
-            handleDeleteItem={handleDeleteItem}
+            handleDeleteClick={handleDeleteClick}
           />
           <RegisterModal
             activeModal={activeModal}
@@ -304,6 +361,13 @@ function App() {
             activeModal={activeModal}
             handleProfileSubmit={handleProfileSubmit}
             closeModal={closeModal}
+          />
+          <DeleteModal
+            activeModal={activeModal}
+            handleDeleteClick={handleDeleteClick}
+            handleDeleteConfirmation={handleDeleteConfirmation}
+            closeModal={closeModal}
+            handleDeleteItem={handleDeleteItem}
           />
         </CurrentTemperatureUnitContext.Provider>
       </div>
