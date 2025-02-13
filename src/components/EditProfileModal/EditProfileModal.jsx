@@ -12,17 +12,13 @@ function EditProfileModal({ activeModal, closeModal, handleProfileSubmit }) {
     avatar: "",
   });
 
-  useEffect(
-    () => {
-      if (currentUser && activeModal === "edit-profile")
-        setValues({
-          name: currentUser?.name || "",
-          avatar: currentUser?.avatar || "",
-        });
-    },
-    [currentUser],
-    [activeModal]
-  );
+  useEffect(() => {
+    if (currentUser && activeModal === "edit-profile") console.log(currentUser);
+    setValues({
+      name: currentUser?.name || "",
+      avatar: currentUser?.avatar || "",
+    });
+  }, [currentUser, activeModal]);
 
   const profileEditSubmit = (e) => {
     e.preventDefault();
@@ -45,7 +41,7 @@ function EditProfileModal({ activeModal, closeModal, handleProfileSubmit }) {
           name="name"
           id="name"
           className="modal__input"
-          placeholder="Name"
+          //placeholder="Name"
           value={values.name}
           onChange={handleChange}
         />
@@ -57,7 +53,7 @@ function EditProfileModal({ activeModal, closeModal, handleProfileSubmit }) {
           name="avatar"
           id="avatar"
           className="modal__input"
-          placeholder="Avatar"
+          //placeholder="Avatar"
           value={values.avatar}
           onChange={handleChange}
         />
