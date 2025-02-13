@@ -11,10 +11,6 @@ function EditProfileModal({ activeModal, closeModal, handleProfileSubmit }) {
   });
 
   useEffect(() => {
-    console.log("useEffect triggered!");
-    console.log("currentUser:", currentUser);
-    console.log("activeModal:", activeModal);
-
     if (currentUser?.name && activeModal === "edit-profile") {
       console.log("Updating form values with currentUser data:", {
         name: currentUser.name,
