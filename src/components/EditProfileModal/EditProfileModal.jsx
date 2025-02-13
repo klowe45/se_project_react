@@ -4,7 +4,7 @@ import { useForm } from "../../Hooks/hook";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function EditProfileModal({ activeModal, closeModal, handleProfileSubmit }) {
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
   const { values, handleChange, setValues } = useForm({
     name: "",
     avatar: "",
