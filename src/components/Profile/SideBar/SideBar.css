@@ -20,6 +20,7 @@
   line-height: 25px;
   padding-top: 16px;
   font-family: "Cabinet Grotesk", sans-serif;
+  white-space: pre;
 }
 
 .sidebar__links {

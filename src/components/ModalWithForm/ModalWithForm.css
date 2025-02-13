@@ -97,6 +97,35 @@
   color: #ffffff;
 }
 
+.modal__submit_disabled {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 24px 0 0 0;
+  max-width: 124px;
+  max-height: 36px;
+  padding: 8px 15px;
+  background-color: #000000;
+  color: #ffffff;
+  opacity: 50%;
+}
+
 .modal__submit:hover {
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal__button-login {
+  border: none;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 24px 0 0 0;
+  max-width: 124px;
+  max-height: 36px;
+  padding: 8px 15px;
+  background-color: transparent;
+  color: #000000;
+  opacity: 50%;
 }

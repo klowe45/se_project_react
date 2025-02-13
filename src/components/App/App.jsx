@@ -345,11 +345,13 @@ function App() {
             activeModal={activeModal}
             closeModal={closeModal}
             handleRegistrationSubmit={handleRegistrationSubmit}
+            handleLoginClick={handleLoginClick}
           />
           <LoginModal
             activeModal={activeModal}
             closeModal={closeModal}
             handleLoginSubmit={handleLoginSubmit}
+            handleRegisterClick={handleRegisterClick}
           />
           <EditProfileModal
             activeModal={activeModal}

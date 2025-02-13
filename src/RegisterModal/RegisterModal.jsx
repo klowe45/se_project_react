@@ -2,7 +2,12 @@ import { React, useState, useEffect } from "react";
 import ModalWithForm from "../components/ModalWithForm/ModalWithForm";
 import { useForm } from "../Hooks/hook";
 
-function RegisterModal({ activeModal, closeModal, handleRegistrationSubmit }) {
+function RegisterModal({
+  activeModal,
+  closeModal,
+  handleRegistrationSubmit,
+  handleLoginClick,
+}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -26,16 +31,22 @@ function RegisterModal({ activeModal, closeModal, handleRegistrationSubmit }) {
     handleRegistrationSubmit(values);
   };
 
+  const handleOrLogInClick = () => {
+    handleLoginClick();
+  };
+
   useEffect(handleResetInputs, [activeModal]);
 
   return (
     <ModalWithForm
       titleText="Sign up"
       buttonText="Sign Up"
+      buttonTextTwo="Or Log In"
       activeModal={activeModal}
       closeModal={closeModal}
       isOpen={activeModal === "register"}
       onSubmit={onRegistration}
+      orLogIn={handleOrLogInClick}
     >
       <label htmlFor="email" className="modal__label">
         Email*{""}
