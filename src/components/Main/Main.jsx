@@ -8,8 +8,6 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 function Main({ weatherData, handleCardClick, handleCardLike, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
-  //const { clothingItems } = useContext(CurrentUserContext);
-
   const filteredItems = clothingItems.filter(
     (item) => item.weather === weatherData.type
   );
