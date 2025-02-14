@@ -22,6 +22,12 @@ import DeleteModal from "../../components/DeleteModal/DeleteModal";
 
 function App() {
   /***************************************************************************
+   *                                  User                                    *
+   **************************************************************************/
+
+  const [user, setUser] = useState({ email: "", name: "", avatar: "" });
+
+  /***************************************************************************
    *                             CLOTHING ITEMS                              *
    **************************************************************************/
 
@@ -30,7 +36,7 @@ function App() {
   const handleCardLike = (id, isLiked) => {
     const token = localStorage.getItem("jwt");
 
-    if (!token) {
+    if (!token && (isLoggedIn = false)) {
       console.log("No token found");
       return;
     }
@@ -98,12 +104,6 @@ function App() {
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
-
-  /***************************************************************************
-   *                                  User                                    *
-   **************************************************************************/
-
-  const [user, setUser] = useState({ email: "", name: "", avatar: "" });
 
   /***************************************************************************
    *                                  Registration                           *

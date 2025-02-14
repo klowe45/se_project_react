@@ -36,15 +36,18 @@ function ItemCard({ id, item, handleCardClick, handleCardLike }) {
     <li className="card">
       <div className="card__header">
         <h2 className="card__name">{item.name}</h2>
-        <button
-          type="button"
-          src={likeButton}
-          alt="like button"
-          className={`card__like-btn ${
-            isCurrentlyLiked ? itemLikeButtonClassName : ""
-          }`}
-          onClick={handleCardLikeState}
-        ></button>
+        {isLoggedIn && (
+          <button
+            type="button"
+            src={likeButton}
+            alt="like button"
+            className={`card__like-btn ${
+              isCurrentlyLiked ? itemLikeButtonClassName : ""
+            }`}
+            onClick={handleCardLikeState}
+            disabled={!isLoggedIn}
+          ></button>
+        )}
       </div>
       <img
         onClick={handleCardPreview}
