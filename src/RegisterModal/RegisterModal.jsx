@@ -48,48 +48,48 @@ function RegisterModal({
       onSubmit={onRegistration}
       orLogIn={handleOrLogInClick}
     >
-      <label htmlFor="email" className="modal__label">
+      <label htmlFor="email-register" className="modal__label">
         Email*{""}
         <input
           type="email"
           name="email"
-          id="email"
+          id="email-register"
           className="modal__input"
           placeholder="Email"
           value={values.email}
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="password" className="modal__label">
+      <label htmlFor="password-register" className="modal__label">
         Password*{""}
         <input
-          type="text"
+          type="password"
           name="password"
-          id="password"
+          id="password-register"
           className="modal__input"
           placeholder="Password"
           value={values.password}
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="name-register" className="modal__label">
         Name*{""}
         <input
           type="text"
           name="name"
-          id="name"
+          id="name-register"
           className="modal__input"
           placeholder="Name"
           value={values.name}
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="avatar" className="modal__label">
+      <label htmlFor="avatar-register" className="modal__label">
         Avatar*{""}
         <input
           type="text"
           name="avatar"
-          id="Avatar"
+          id="Avatar-register"
           className="modal__input"
           placeholder="Avatar URL"
           value={values.avatar}

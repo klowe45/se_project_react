@@ -40,24 +40,24 @@ function LoginModal({
       onSubmit={onLogin}
       orSignUp={handleOrSignUp}
     >
-      <label htmlFor="email" className="modal__label">
+      <label htmlFor="email-login" className="modal__label">
         Email*{""}
         <input
           type="email"
           name="email"
-          id="email"
+          id="email-login"
           className="modal__input"
           placeholder="Email"
           value={values.email}
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="password" className="modal__label">
+      <label htmlFor="password-login" className="modal__label">
         Password*{""}
         <input
           type="password"
           name="password"
-          id="password"
+          id="password-login"
           className="modal__input"
           placeholder="Password"
           value={values.password}
