@@ -41,7 +41,7 @@ function App() {
       return;
     }
 
-    if (!isLiked) {
+    if (isLiked) {
       api
         .addCardLike(id, token)
         .then(() => {
@@ -268,7 +268,7 @@ function App() {
     api
       .addItems(item)
       .then((item) => {
-        setClothingItems([item, ...clothingItems]);
+        setClothingItems([item.data, ...clothingItems]);
         closeModal();
       })
       .catch((err) => console.log(err));
