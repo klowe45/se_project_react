@@ -16,12 +16,14 @@ function ItemCard({ id, item, handleCardClick, handleCardLike }) {
   const [isCurrentlyLiked, setIsCurrentlyLiked] = useState(isLiked);
 
   useEffect(() => {
-    if (!clothingItems?.length || !id || !currentUser) return;
+    if (!clothingItems?.length || !cardKey || !currentUser) return;
     const currentItem = clothingItems.find(
       (clothingItem) => clothingItem._id === cardKey
     );
 
-    setIsCurrentlyLiked(currentItem?.likes.includes(currentUser?._id || false));
+    setIsCurrentlyLiked(
+      currentItem?.likes.includes(currentUser?._id || !cardKey)
+    );
   }, [clothingItems, id, currentUser]);
 
   const handleCardLikeState = () => {
