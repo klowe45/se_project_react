@@ -26,8 +26,9 @@ function ItemCard({ id, item, handleCardClick, handleCardLike }) {
   }, [clothingItems, id, currentUser]);
 
   const handleCardLikeState = () => {
-    handleCardLike(cardKey, !isCurrentlyLiked);
-    setIsCurrentlyLiked((prevState) => !prevState);
+    handleCardLike(cardKey, !isCurrentlyLiked).then(() =>
+      setIsCurrentlyLiked((prevState) => !prevState)
+    );
   };
 
   const itemLikeButtonClassName = `card__like-btn_is-liked`;

@@ -8,10 +8,6 @@ function RegisterModal({
   handleRegistrationSubmit,
   handleLoginClick,
 }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [avatar, setAvatar] = useState("");
   const { values, handleChange, setValues } = useForm({
     email: "",
     password: "",
@@ -20,22 +16,18 @@ function RegisterModal({
   });
 
   const handleResetInputs = () => {
-    setEmail("");
-    setPassword("");
-    setName("");
-    setAvatar("");
+    setValues("");
   };
 
   const onRegistration = (e) => {
     e.preventDefault();
     handleRegistrationSubmit(values);
+    handleResetInputs();
   };
 
   const handleOrLogInClick = () => {
     handleLoginClick();
   };
-
-  useEffect(handleResetInputs, [activeModal]);
 
   return (
     <ModalWithForm
@@ -46,7 +38,7 @@ function RegisterModal({
       closeModal={closeModal}
       isOpen={activeModal === "register"}
       onSubmit={onRegistration}
-      orLogIn={handleOrLogInClick}
+      toggleLoginRegister={handleOrLogInClick}
     >
       <label htmlFor="email-register" className="modal__label">
         Email*{""}

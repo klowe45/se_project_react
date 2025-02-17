@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect } from "react";
 import ModalWithForm from "../components/ModalWithForm/ModalWithForm";
 import { useForm } from "../Hooks/hook";
 
@@ -8,8 +8,6 @@ function LoginModal({
   handleLoginSubmit,
   handleRegisterClick,
 }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const { values, handleChange, setValues } = useForm({
     email: "",
     password: "",
@@ -38,7 +36,7 @@ function LoginModal({
       closeModal={closeModal}
       isOpen={activeModal === "login"}
       onSubmit={onLogin}
-      orSignUp={handleOrSignUp}
+      toggleLoginRegister={handleOrSignUp}
     >
       <label htmlFor="email-login" className="modal__label">
         Email*{""}

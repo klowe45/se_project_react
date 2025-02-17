@@ -36,13 +36,13 @@ function App() {
   const handleCardLike = (id, isLiked) => {
     const token = localStorage.getItem("jwt");
 
-    if (!token && (isLoggedIn = false)) {
+    if (!token && isLoggedIn === false) {
       console.log("No token found");
-      return;
+      return Promise.reject("No token found");
     }
 
     if (isLiked) {
-      api
+      return api
         .addCardLike(id, token)
         .then(() => {
           setClothingItems((cards) =>
@@ -53,9 +53,12 @@ function App() {
             )
           );
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          throw err;
+        });
     } else {
-      api
+      return api
         .removeCardLike(id, token)
         .then(() => {
           setClothingItems((cards) =>
@@ -69,7 +72,10 @@ function App() {
             )
           );
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          throw err;
+        });
     }
   };
   const handleDeleteItem = (card) => {
@@ -122,7 +128,7 @@ function App() {
         handleLoginSubmit({ email, password });
         closeModal();
       })
-      .catch(console.error);
+      .catch((err) => console.error("Error handling register submit", err));
   };
 
   /***************************************************************************
@@ -139,7 +145,7 @@ function App() {
         handleTokenCheck(data.token);
         closeModal();
       })
-      .catch(console.error);
+      .catch((err) => console.error("Error handling login submit", err));
   };
 
   const handleTokenCheck = (token) => {
@@ -153,8 +159,14 @@ function App() {
         localStorage.removeItem("jwt");
         setUser({});
         setIsLoggedIn(false);
-      });
+      })
+      .catch((err) => console.error("Error handling token check", err));
   };
+
+  /***************************************************************************
+   *                               TOGGLE Login/register                     *
+   **************************************************************************/
+
   /***************************************************************************
    *                                  Log out                                *
    **************************************************************************/
@@ -183,7 +195,8 @@ function App() {
       .catch(console.error)
       .finally(() => {
         console.log("Profile updated");
-      });
+      })
+      .catch((err) => console.error("Error handling profile submit", err));
   };
 
   /***************************************************************************
@@ -192,13 +205,16 @@ function App() {
 
   const handleDeleteConfirmation = () => {
     const cardId = selectedCard._id;
-    api.deleteItem(cardId).then(() => {
-      setClothingItems((prevItems) =>
-        prevItems.filter((item) => item._id !== cardId)
-      );
-      setSelectedCard({});
-      closeModal();
-    });
+    api
+      .deleteItem(cardId)
+      .then(() => {
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item._id !== cardId)
+        );
+        setSelectedCard({});
+        closeModal();
+      })
+      .catch((err) => console.error("Error handling delete confirmation", err));
   };
 
   /***************************************************************************
