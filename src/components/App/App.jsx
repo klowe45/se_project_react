@@ -44,13 +44,9 @@ function App() {
     if (isLiked) {
       return api
         .addCardLike(id, token)
-        .then(() => {
+        .then((updatedCard) => {
           setClothingItems((cards) =>
-            cards.map((item) =>
-              item._id === id
-                ? { ...item, likes: [...item.likes, user.userId] }
-                : item
-            )
+            cards.map((item) => (item._id === id ? updatedCard.data : item))
           );
         })
         .catch((err) => {
@@ -60,16 +56,9 @@ function App() {
     } else {
       return api
         .removeCardLike(id, token)
-        .then(() => {
+        .then((updatedCard) => {
           setClothingItems((cards) =>
-            cards.map((item) =>
-              item._id === id
-                ? {
-                    ...item,
-                    likes: item.likes.filter((id) => id !== user.userId),
-                  }
-                : item
-            )
+            cards.map((item) => (item._id === id ? updatedCard.data : item))
           );
         })
         .catch((err) => {
