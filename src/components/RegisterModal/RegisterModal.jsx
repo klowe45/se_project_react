@@ -16,13 +16,26 @@ function RegisterModal({
   });
 
   const handleResetInputs = () => {
-    setValues("");
+    setValues({
+      email: "",
+      password: "",
+      name: "",
+      avatar: "",
+    });
   };
+
+  useEffect(() => {
+    setValues({
+      email: "",
+      password: "",
+      name: "",
+      avatar: "",
+    });
+  }, [activeModal, setValues]);
 
   const onRegistration = (e) => {
     e.preventDefault();
     handleRegistrationSubmit(values);
-    handleResetInputs();
   };
 
   const handleOrLogInClick = () => {
@@ -81,7 +94,7 @@ function RegisterModal({
         <input
           type="text"
           name="avatar"
-          id="Avatar-register"
+          id="avatar-register"
           className="modal__input"
           placeholder="Avatar URL"
           value={values.avatar}
