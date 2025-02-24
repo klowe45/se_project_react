@@ -19,7 +19,6 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
-import NotFoundError from "../../Errors/NotFoundError";
 
 function App() {
   /***************************************************************************
@@ -142,9 +141,6 @@ function App() {
     auth
       .checkForToken(token)
       .then((data) => {
-        if (!data) {
-          throw new NotFoundError("No token found!");
-        }
         setUser(data);
         setIsLoggedIn(true);
       })
