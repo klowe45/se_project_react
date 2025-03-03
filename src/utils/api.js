@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3001";
+import { BASE_URL } from "./constants";
 
 export function checkResponse(res) {
   if (res.ok) {
@@ -16,14 +16,14 @@ const authorization = () => {
 };
 
 const getItems = () => {
-  return fetch(`${baseUrl}/items`, {
+  return fetch(`${BASE_URL}/items`, {
     method: "GET",
     headers: authorization(),
   }).then(checkResponse);
 };
 
 const addItems = ({ name, weather, imageUrl }) => {
-  return fetch(`${baseUrl}/items`, {
+  return fetch(`${BASE_URL}/items`, {
     method: "POST",
     headers: authorization(),
     body: JSON.stringify({
@@ -35,14 +35,14 @@ const addItems = ({ name, weather, imageUrl }) => {
 };
 
 const deleteItem = (id) => {
-  return fetch(`${baseUrl}/items/${id}`, {
+  return fetch(`${BASE_URL}/items/${id}`, {
     method: "DELETE",
     headers: authorization(),
   }).then(checkResponse);
 };
 
 const profileEdited = (name, avatar, _id, token) => {
-  return fetch(`${baseUrl}/users/me`, {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const profileEdited = (name, avatar, _id, token) => {
 };
 
 const addCardLike = (id, token) => {
-  return fetch(`${baseUrl}/items/${id}/likes`, {
+  return fetch(`${BASE_URL}/items/${id}/likes`, {
     method: "PUT",
     headers: {
       authorization: `Bearer ${token}`,
@@ -63,7 +63,7 @@ const addCardLike = (id, token) => {
 };
 
 const removeCardLike = (id, token) => {
-  return fetch(`${baseUrl}/items/${id}/likes`, {
+  return fetch(`${BASE_URL}/items/${id}/likes`, {
     method: "DELETE",
     headers: {
       authorization: `Bearer ${token}`,

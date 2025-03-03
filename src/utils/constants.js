@@ -115,3 +115,8 @@ export const coordinates = {
 };
 
 export const APIkey = "93427bd0a91a81e336cadb1286a7a424";
+
+export const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwr-project.happyforever.com"
+    : "http://localhost:3001";
